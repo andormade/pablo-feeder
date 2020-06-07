@@ -5,11 +5,13 @@ char ssid[] = "ssid";
 char pass[] = "password";
 
 int status = WL_IDLE_STATUS;
-WiFiServer server(80);
+WiFiServer server(6969);
 
 void setup() {
   Serial.begin(9600);
-  pinMode(9, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(13, OUTPUT);
   WiFi.setHostname("Catfeeder");
 
   while (status != WL_CONNECTED) {
@@ -42,11 +44,28 @@ void loop() {
         } else if (c != '\r') {
           currentLine += c;
         }
+        
+        if (currentLine.endsWith("GET /feed")) {
+          startFeeding();
+        }
       }
     }
 
     client.stop();
   }
+}
+
+void startFeeding() {
+   digitalWrite(13, HIGH);          
+   digitalWrite(12, LOW);  
+   digitalWrite(LED_BUILTIN, HIGH);     
+   delay(2000);
+   digitalWrite(13, LOW);        
+   digitalWrite(12, HIGH);   
+   delay(2000);
+   digitalWrite(13, LOW);        
+   digitalWrite(12, LOW);   
+   digitalWrite(LED_BUILTIN, LOW);
 }
 
 void printHttpHeaders(Stream *Out) {
