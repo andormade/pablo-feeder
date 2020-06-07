@@ -3,9 +3,11 @@
 
 char ssid[] = "ssid";
 char pass[] = "password";
+char address[] = "example.com"
 
 int status = WL_IDLE_STATUS;
 WiFiServer server(6969);
+WiFiClient client;
 
 void setup() {
   Serial.begin(9600);
@@ -21,6 +23,21 @@ void setup() {
   }
   server.begin();
   printWifiStatus(&Serial);
+  updateIpAddress();
+}
+
+void updateIpAddress() {
+  Serial.println("Updating IP address...");
+  if (client.connect(address, 80)) {
+    Serial.println("Connected to server");
+    client.println("GET /update-address?protocol=http&port=6969 HTTP/1.1");
+    client.println("Host: pablo-feeder.herokuapp.com");
+    client.println("Connection: close");
+    client.println();
+  }
+  else {
+    Serial.println("Failed to connect");
+  }
 }
 
 
