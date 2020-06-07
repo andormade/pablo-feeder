@@ -15,7 +15,8 @@ app.get('/update-address', (req, res) => {
 	const host = ip6addr.parse(req.connection.remoteAddress).toString({ format: 'v4' })
 	address = protocol + '://' + host + ':' + port
 	lastUpdate = Date.now()
-	res.sendStatus(200)
+	res.send(req.header('x-forwarded-for'))
+	//res.sendStatus(200)
 })
 
 app.get('/get-address', (req, res) => {
