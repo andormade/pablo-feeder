@@ -44,7 +44,7 @@ void loop() {
         } else if (c != '\r') {
           currentLine += c;
         }
-        
+
         if (currentLine.endsWith("GET /feed")) {
           startFeeding();
         }
@@ -56,16 +56,16 @@ void loop() {
 }
 
 void startFeeding() {
-   digitalWrite(13, HIGH);          
-   digitalWrite(12, LOW);  
-   digitalWrite(LED_BUILTIN, HIGH);     
-   delay(2000);
-   digitalWrite(13, LOW);        
-   digitalWrite(12, HIGH);   
-   delay(2000);
-   digitalWrite(13, LOW);        
-   digitalWrite(12, LOW);   
-   digitalWrite(LED_BUILTIN, LOW);
+  digitalWrite(13, HIGH);
+  digitalWrite(12, LOW);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(2000);
+  digitalWrite(13, LOW);
+  digitalWrite(12, HIGH);
+  delay(2000);
+  digitalWrite(13, LOW);
+  digitalWrite(12, LOW);
+  digitalWrite(LED_BUILTIN, LOW);
 }
 
 void printHttpHeaders(Stream *Out) {
