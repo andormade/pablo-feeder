@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/andormade/pablo-feeder#readme",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "ip6addr": "^0.2.3"
   }
 }
